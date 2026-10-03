@@ -1,9 +1,13 @@
+import type { WeatherResponse } from '@/lib/types';
+
 const OPEN_METEO_URL = "https://api.open-meteo.com/v1/forecast?latitude=44.058174&longitude=-121.315308&current=temperature_2m,weather_code,wind_speed_10m&wind_speed_unit=mph&temperature_unit=fahrenheit";
+
 type WeatherResponse = {
     temperature: number;
     windSpeed: number;
     weatherCode: number;
 };
+
 export async function GET() {
     try {
         const response = await fetch(OPEN_METEO_URL);
