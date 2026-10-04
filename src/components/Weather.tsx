@@ -30,5 +30,17 @@ export default function Weather() {
     loadWeather();
   }, []);
 
-  return <p>Weather goes here</p>;
+  if (loading) {
+    return <p role="status">Loading weather...</p>;
+  }
+  if (error || !weather) {
+    return <p role="alert">Weather is unavailable right now.</p>;
+  }
+
+  return (
+    <div>
+      <p>Temperature: {weather.temperature}°F</p>
+      <p>Wind speed: {weather.windSpeed} mph</p>
+    </div>
+  );
 }
