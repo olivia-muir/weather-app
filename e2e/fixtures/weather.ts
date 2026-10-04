@@ -1,4 +1,4 @@
-import type { WeatherReponse } from '@/lib/types';
+import type { WeatherResponse } from '@/lib/types';
 
 export const sunnyWeather: WeatherResponse = {
     temperature: 72,
