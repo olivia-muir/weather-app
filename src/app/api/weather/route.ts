@@ -4,7 +4,9 @@ const OPEN_METEO_URL = "https://api.open-meteo.com/v1/forecast?latitude=44.05817
 
 export async function GET() {
     try {
-        const response = await fetch(OPEN_METEO_URL);
+        const response = await fetch(OPEN_METEO_URL, {
+            next: { revalidate: 600 },
+        });
         if (!response.ok) {
             return Response.json(
                 { error: "Weather service unavailable" },
@@ -18,7 +20,7 @@ export async function GET() {
             temperature: data.current.temperature_2m,
             windSpeed: data.current.wind_speed_10m,
             weatherCode: data.current.weather_code,
-        }
+        };
 
         return Response.json(result);
     } catch (error) {
