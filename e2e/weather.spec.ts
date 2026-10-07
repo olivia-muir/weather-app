@@ -3,7 +3,7 @@ import { sunnyWeather } from './fixtures/weather';
 
 test('shows loading message until weather is loaded', async ({ page }) => {
     const { promise: gate, resolve: openGate } = Promise.withResolvers<void>();
-    await page.route('**/api/weather', async route => {
+    await page.route('**/api/weather*', async route => {
         await gate;
         await route.fulfill({ json: sunnyWeather });
     });
@@ -16,7 +16,7 @@ test('shows loading message until weather is loaded', async ({ page }) => {
 
 
 test('shows current weather', async ({ page }) => {
-    await page.route('**/api/weather', async route => {
+    await page.route('**/api/weather*', async route => {
         await route.fulfill({ json: sunnyWeather });
     });
     await page.goto('/');
@@ -27,7 +27,7 @@ test('shows current weather', async ({ page }) => {
 });
 
 test('shows an error message when weather API fails', async ({ page }) => {
-    await page.route('**/api/weather', async route => {
+    await page.route('**/api/weather*', async route => {
         await route.fulfill({ status: 500 });
     });
     await page.goto('/');

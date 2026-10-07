@@ -11,7 +11,7 @@ export default function Weather() {
   useEffect(() => {
     async function loadWeather() {
       try {
-        const response = await fetch("/api/weather");
+        const response = await fetch("/api/weather?latitude=44.058174&longitude=-121.315308");
         if (!response.ok) {
           setError(true);
           return;
